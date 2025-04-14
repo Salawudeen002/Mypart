@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freeio - Join Our Platform</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      max-width: 500px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .logo {
+      color: #2a41e8;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .user-type-options {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .user-type-option {
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .user-type-option:hover {
+      border-color: #2a41e8;
+    }
+
+    .user-type-option.selected {
+      border-color: #2a41e8;
+      background-color: #f8f9ff;
+    }
+
+    .user-type-option input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .user-type-option .checkmark {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      height: 20px;
+      width: 20px;
+      border: 2px solid #ddd;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .user-type-option.selected .checkmark {
+      border-color: #2a41e8;
+      background-color: #2a41e8;
+    }
+
+    .user-type-option.selected .checkmark:after {
+      content: "";
+      position: absolute;
+      display: block;
+      top: 4px;
+      left: 4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+    }
+
+    .user-type-option h3 {
+      font-size: 18px;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .user-type-option p {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 14px;
+      background-color: #2a41e8;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary:hover {
+      background-color: #1a30d0;
+    }
+
+    .login-link {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .login-link a {
+      color: #2a41e8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">Freeio</div>
+    <h1>Join as a client or freelancer</h1>
+
+    <div class="user-type-options">
+      <label class="user-type-option selected">
+        <input type="radio" name="user-type" value="client" checked>
+        <span class="checkmark"></span>
+        <h3>I'm a client, hiring for a project</h3>
+        <p>Find and hire skilled freelancers for your projects</p>
+      </label>
+
+      <label class="user-type-option">
+        <input type="radio" name="user-type" value="freelancer">
+        <span class="checkmark"></span>
+        <h3>I'm a freelancer, looking for work</h3>
+        <p>Find freelance jobs and grow your career</p>
+      </label>
+    </div>
+
+    <button class="btn-primary" onclick="redirectToSignup()">Create Account</button>
+
+    <p class="login-link">Already have an account? <a href="#">Log In</a></p>
+  </div>
+
+  <script>
+    function redirectToSignup() {
+      const selectedUserType = document.querySelector('input[name="user-type"]:checked').value;
+
+      if (selectedUserType === 'client') {
+        window.location.href = 'login-client.html'; 
+      } else if (selectedUserType === 'freelancer') {
+        window.location.href = 'login-freelancer.html';
+      }
+    }
+
+    document.querySelectorAll('.user-type-option').forEach(option => {
+      option.addEventListener('click', function () {
+        document.querySelectorAll('.user-type-option').forEach(opt => {
+          opt.classList.remove('selected');
+        });
+        this.classList.add('selected');
+        this.querySelector('input').checked = true;
+      });
+    });
+  </script>
+</body>
+</html>
