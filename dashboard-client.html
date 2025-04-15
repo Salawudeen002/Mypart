@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard - Freeio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2a41e8;
+            --secondary-color: #f8f9ff;
+            --text-color: #333;
+            --light-text: #666;
+            --border-color: #e0e0e0;
+            --success-color: #4CAF50;
+            --warning-color: #FF9800;
+            --info-color: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background-color: white;
+            padding: 30px 20px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+        }
+        
+        .logo {
+            color: var(--primary-color);
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            padding-left: 10px;
+        }
+        
+        .nav-menu {
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-bottom: 10px;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        
+        .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 30px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .greeting h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .greeting p {
+            color: var(--light-text);
+        }
+        
+        .review-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .review-btn:hover {
+            background-color: #1a30d0;
+        }
+        
+        /* Dashboard Sections */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .dashboard-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .card-header h2 {
+            font-size: 18px;
+        }
+        
+        .card-header a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        /* Hiring Needs Section */
+        .position-list {
+            list-style: none;
+        }
+        
+        .position-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .position-item:last-child {
+            border-bottom: none;
+        }
+        
+        .position-name {
+            font-weight: 500;
+        }
+        
+        .position-count {
+            color: var(--light-text);
+            font-size: 14px;
+        }
+        
+        /* Recruitment Progress Section */
+        .recruitment-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .recruitment-table th {
+            text-align: left;
+            padding: 10px 0;
+            font-weight: 500;
+            color: var(--light-text);
+            font-size: 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .recruitment-table td {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .recruitment-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-design {
+            background-color: #E3F2FD;
+            color: var(--info-color);
+        }
+        
+        .status-interview {
+            background-color: #FFF8E1;
+            color: var(--warning-color);
+        }
+        
+        .status-review {
+            background-color: #E8F5E9;
+            color: var(--success-color);
+        }
+        
+        .status-task {
+            background-color: #F3E5F5;
+            color: #9C27B0;
+        }
+        
+        /* Applicants Section */
+        .applicant-list {
+            list-style: none;
+        }
+        
+        .applicant-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .applicant-item:last-child {
+            border-bottom: none;
+        }
+        
+        .applicant-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .applicant-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eee;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .applicant-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .applicant-name {
+            font-weight: 500;
+        }
+        
+        .applicant-position {
+            font-size: 13px;
+            color: var(--light-text);
+        }
+        
+        /* Training Section */
+        .training-list {
+            list-style: none;
+        }
+        
+        .training-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .training-item:last-child {
+            border-bottom: none;
+        }
+        
+        .training-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .training-platform {
+            font-size: 13px;
+            color: var(--light-text);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">Freeio</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-briefcase"></i>
+                        Jobs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        Candidates
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-file-alt"></i>
+                        Contracts
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-chart-line"></i>
+                        Reports
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <div class="greeting">
+                    <h1>Hello 😎</h1>
+                    <p>You have 75 new applications. It is a lot of work for today to be better.</p>
+                </div>
+                <button class="review-btn">Review</button>
+            </div>
+            
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Hiring Needs Card -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>You Need to Hire</h2>
+                        <a href="#">View All</a>
+                    </div>
+                    <ul class="position-list">
+                        <li class="position-item">
+                            <span class="position-name">Content Designers</span>
+                            <span class="position-count">5 positions</span>
+                        </li>
+                        <li class="position-item">
+                            <span class="position-name">The Developer</span>
+                            <span class="position-count">3 positions</span>
+                        </li>
+                        <li class="position-item">
+                            <span class="position-name">UVAX Designer</span>
+                            <span class="position-count">2 positions</span>
+                        </li>
+                        <li class="position-item">
+                            <span class="position-name">IOS Developer</span>
+                            <span class="position-count">4 positions</span>
+                        </li>
+                        <li class="position-item">
+                            <span class="position-name">AppData Developer</span>
+                            <span class="position-count">1 position</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Recruitment Progress Card -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Recruitment Progress</h2>
+                        <a href="#">View All</a>
+                    </div>
+                    <table class="recruitment-table">
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Position</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ZE</td>
+                                <td>Join One</td>
+                                <td><span class="status status-design">Design online</span></td>
+                            </tr>
+                            <tr>
+                                <td>UVAX Designer</td>
+                                <td>Tech Interview</td>
+                                <td><span class="status status-interview">Sun Emmanuel</span></td>
+                            </tr>
+                            <tr>
+                                <td>Join Samuel</td>
+                                <td>PHP Developer</td>
+                                <td><span class="status status-review">Players Review</span></td>
+                            </tr>
+                            <tr>
+                                <td>Sun Emmanuel</td>
+                                <td>UVAX Designer</td>
+                                <td><span class="status status-task">Task</span></td>
+                            </tr>
+                            <tr>
+                                <td>Join Des</td>
+                                <td>Content Designer</td>
+                                <td><span class="status status-interview">Final Interview</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="dashboard-grid">
+                <!-- New Applicants Card -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>New Applicants</h2>
+                        <a href="#">View All</a>
+                    </div>
+                    <ul class="applicant-list">
+                        <li class="applicant-item">
+                            <div class="applicant-info">
+                                <div class="applicant-avatar">VT</div>
+                                <div>
+                                    <div class="applicant-name">Visa Tyson</div>
+                                    <div class="applicant-position">Apple TV: iOS Developer</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-ellipsis-v" style="color: var(--light-text); cursor: pointer;"></i>
+                        </li>
+                        <li class="applicant-item">
+                            <div class="applicant-info">
+                                <div class="applicant-avatar">ZT</div>
+                                <div>
+                                    <div class="applicant-name">Zen Thoms</div>
+                                    <div class="applicant-position">Android: Content Designer</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-ellipsis-v" style="color: var(--light-text); cursor: pointer;"></i>
+                        </li>
+                        <li class="applicant-item">
+                            <div class="applicant-info">
+                                <div class="applicant-avatar">NL</div>
+                                <div>
+                                    <div class="applicant-name">News/Likersham</div>
+                                    <div class="applicant-position">Android: Content Designer</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-ellipsis-v" style="color: var(--light-text); cursor: pointer;"></i>
+                        </li>
+                        <li class="applicant-item">
+                            <div class="applicant-info">
+                                <div class="applicant-avatar">JS</div>
+                                <div>
+                                    <div class="applicant-name">Join Samuel</div>
+                                    <div class="applicant-position">Android: iOS Developer</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-ellipsis-v" style="color: var(--light-text); cursor: pointer;"></i>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Ready For Training Card -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Ready For Training</h2>
+                        <a href="#">View All</a>
+                    </div>
+                    <ul class="training-list">
+                        <li class="training-item">
+                            <div class="training-name">Visa Tyson</div>
+                            <div class="training-platform">New Apps</div>
+                        </li>
+                        <li class="training-item">
+                            <div class="training-name">Smartphone</div>
+                            <div class="training-platform">Web Designer</div>
+                        </li>
+                        <li class="training-item">
+                            <div class="training-name">Google Chrome</div>
+                            <div class="training-platform">Amazon.com</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

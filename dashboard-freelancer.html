@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Dashboard - Freeio</title>
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            flex: 0 0 250px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-right: 20px;
+        }
+        
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .edit-avatar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+        
+        .sidebar-menu a {
+            display: block;
+            padding: 10px;
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-menu a:hover {
+            background-color: #f0f0f0;
+            color: #3498db;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .profile-section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        /* Points Section */
+        .points-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .points-info {
+            flex: 1;
+        }
+        
+        .points-level {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            height: 10px;
+            margin: 10px 0;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            border-radius: 10px;
+            background-color: #3498db;
+            width: 49.5%;
+        }
+        
+        .points-left {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        /* Form Styles */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .form-group input:focus, 
+        .form-group select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .required-field::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        /* Expertise & Interests */
+        .expertise-list, .interests-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .expertise-item, .interest-item {
+            background-color: #e8f4fc;
+            color: #3498db;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        /* Certifications Table */
+        .certifications-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .certifications-table th, 
+        .certifications-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .certifications-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .certifications-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .action-btn {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .action-btn:hover {
+            text-decoration: underline;
+        }
+        
+        /* Table Controls */
+        .table-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .entries-info {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .pagination {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .page-btn {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .page-btn:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .page-btn.active {
+            background-color: #3498db;
+            color: #fff;
+            border-color: #3498db;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-update {
+            background-color: #2ecc71;
+            color: #fff;
+            margin-top: 20px;
+        }
+        
+        .btn-update:hover {
+            background-color: #27ae60;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                margin-right: 0;
+                margin-bottom: 20px;
+                flex: 0 0 auto;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-header">
+                <h1>MY PROFILE</h1>
+                <div class="avatar">
+                    <span class="edit-avatar">✏️</span>
+                </div>
+                <p>About ademax</p>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li><a href="#">About Me</a></li>
+                <li><a href="#">Contact Information</a></li>
+                <li><a href="#">Languages</a></li>
+                <li><a href="#">Invite your Friends</a></li>
+                <li><a href="#">Trophy Room</a></li>
+                <li><a href="#">Skills & Education</a></li>
+                <li><a href="#">Work Experience</a></li>
+                <li><a href="#">My Devices & Software</a></li>
+                <li><a href="#">My Identities</a></li>
+                <li><a href="#">Payment Information</a></li>
+                <li><a href="#">Payment History</a></li>
+                <li><a href="#">My Invoices</a></li>
+                <li><a href="#">Security</a></li>
+                <li><a href="#">My Data Profile</a></li>
+                <li><a href="#">Privacy Center</a></li>
+            </ul>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Points Section -->
+            <div class="profile-section">
+                <h2 class="section-title">Ademax</h2>
+                <div class="points-container">
+                    <div class="points-info">
+                        <div class="points-level">Total Points: 50</div>
+                        <div class="progress-container">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <div class="points-left">51 points left to reach the green level</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Personal Info Section -->
+            <div class="profile-section">
+                <h2 class="section-title">About Me</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="username" class="required-field">Username</label>
+                        <input type="text" id="username" value="ademax" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="contractor-id">Contractor ID</label>
+                        <input type="text" id="contractor-id" value="N6397836" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="first-name" class="required-field">First name</label>
+                        <input type="text" id="first-name" value="Salawudeen">
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name" class="required-field">Last name</label>
+                        <input type="text" id="last-name" value="Abdulopyum">
+                    </div>
+                    <div class="form-group">
+                        <label for="year-of-birth">Year of Birth</label>
+                        <input type="text" id="year-of-birth" value="2002">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender">
+                            <option value="male" selected>Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nationality">Nationality</label>
+                        <input type="text" id="nationality" value="United States of America">
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country of Residence</label>
+                        <input type="text" id="country" value="United States of America">
+                    </div>
+                </div>
+                
+                <button class="btn btn-update">Update</button>
+            </div>
+            
+            <!-- Expertise Section -->
+            <div class="profile-section">
+                <h2 class="section-title">Expertise <small>(Maximum selection of Expertise are 5)</small></h2>
+                <div class="expertise-list">
+                    <span class="expertise-item">AI Data Services - Annotation/Labelling</span>
+                    <span class="expertise-item">AI Data Services - Data Collection</span>
+                    <span class="expertise-item">Localization - Copywriting</span>
+                    <span class="expertise-item">Localization - Linguistic Quality Assurance</span>
+                    <span class="expertise-item">Localization - Translation</span>
+                </div>
+                
+                <button class="btn btn-update">Update</button>
+            </div>
+            
+            <!-- Interests Section -->
+            <div class="profile-section">
+                <h2 class="section-title">Interest <small>(Maximum selection of Interests are 10)</small></h2>
+                <div class="interests-list">
+                    <span class="interest-item">AI Data Services - 3D LIDAR Annotation</span>
+                    <span class="interest-item">AI Data Services - Transcription</span>
+                    <span class="interest-item">Localization - Content Writing</span>
+                </div>
+                
+                <button class="btn btn-update">Update</button>
+            </div>
+            
+            <!-- Certifications Section -->
+            <div class="profile-section">
+                <h2 class="section-title">Certifications based on your Expertise(s)</h2>
+                
+                <div class="table-controls">
+                    <div class="entries-info">Show <select>
+                        <option>10</option>
+                        <option>25</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select> entries</div>
+                    <div class="search-box">
+                        <input type="text" placeholder="Search...">
+                    </div>
+                </div>
+                
+                <table class="certifications-table">
+                    <thead>
+                        <tr>
+                            <th>Expertise</th>
+                            <th>Certification Name</th>
+                            <th>Verified (Status)</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>AI Data Services - Annotation/Labelling</td>
+                            <td>Vigor Response Evaluation</td>
+                            <td>Not Verified</td>
+                            <td><a href="#" class="action-btn">Details</a></td>
+                        </tr>
+                        <tr>
+                            <td>AI Data Services - Annotation/Labelling</td>
+                            <td>Vivi Text Annotation</td>
+                            <td>Not Verified</td>
+                            <td><a href="#" class="action-btn">Details</a></td>
+                        </tr>
+                        <tr>
+                            <td>AI Data Services - Annotation/Labelling</td>
+                            <td>APEX Audio Annotation</td>
+                            <td>Not Verified</td>
+                            <td><a href="#" class="action-btn">Details</a></td>
+                        </tr>
+                        <tr>
+                            <td>AI Data Services - Annotation/Labelling</td>
+                            <td>SampleTestDan</td>
+                            <td>Not Verified</td>
+                            <td><a href="#" class="action-btn">Details</a></td>
+                        </tr>
+                        <tr>
+                            <td>AI Data Services - Annotation/Labelling</td>
+                            <td>test_dont use</td>
+                            <td>Not Verified</td>
+                            <td><a href="#" class="action-btn">Details</a></td>
+                        </tr>
+                        <tr>
+                            <td>AI Data Services - Data Collection</td>
+                            <td>a</td>
+                            <td>Not Verified</td>
+                            <td><a href="#" class="action-btn">Details</a></td>
+                        </tr>
+                        <tr>
+                            <td>Localization - Copywriting</td>
+                            <td>LLM Domain Certification Level 1 - Writing</td>
+                            <td>Not Verified</td>
+                            <td><a href="#" class="action-btn">Details</a></td>
+                        </tr>
+                        <tr>
+                            <td>Localization - Copywriting</td>
+                            <td>LLM Writing authoring test EnglishUS</td>
+                            <td>Not Verified</td>
+                            <td><a href="#" class="action-btn">Details</a></td>
+                        </tr>
+                        <tr>
+                            <td>Localization - Linguistic Quality Assurance</td>
+                            <td>LLM Domain Certification Level 1 - Writing</td>
+                            <td>Not Verified</td>
+                            <td><a href="#" class="action-btn">Details</a></td>
+                        </tr>
+                        <tr>
+                            <td>Localization - Linguistic Quality Assurance</td>
+                            <td>LLM Writing authoring test EnglishUS</td>
+                            <td>Not Verified</td>
+                            <td><a href="#" class="action-btn">Details</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="table-controls">
+                    <div class="entries-info">Showing 1 to 10 of 13 entries</div>
+                    <div class="pagination">
+                        <button class="page-btn">Previous</button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">Next</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

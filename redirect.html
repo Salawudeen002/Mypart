@@ -152,37 +152,38 @@
 <body>
   <div class="container">
     <div class="logo">Freeio</div>
-    <h1>Join as a client or freelancer</h1>
+    <h1>Login as a client or freelancer</h1>
 
     <div class="user-type-options">
       <label class="user-type-option selected">
         <input type="radio" name="user-type" value="client" checked>
         <span class="checkmark"></span>
-        <h3>I'm a client, hiring for a project</h3>
-        <p>Find and hire skilled freelancers for your projects</p>
+        <h3>I'm a client </h3>
+        <!-- <p>Find and hire skilled freelancers for your projects</p> -->
       </label>
 
       <label class="user-type-option">
         <input type="radio" name="user-type" value="freelancer">
         <span class="checkmark"></span>
-        <h3>I'm a freelancer, looking for work</h3>
-        <p>Find freelance jobs and grow your career</p>
+        <h3>I'm a freelancer</h3>
+        <!-- <p>Find freelance jobs and grow your career</p> -->
       </label>
     </div>
 
-    <button class="btn-primary" onclick="redirectToSignup()">Create Account</button>
+    <button class="btn-primary" onclick="redirectToLogin()">Login</button>
 
-    <p class="login-link">Already have an account? <a href="redirect.html">Log In</a></p>
+    <p class="login-link">Don't have an account? <a href="join.html">Sign Up</a></p>
   </div>
 
   <script>
-    function redirectToSignup() {
+    function redirectToLogin() {
       const selectedUserType = document.querySelector('input[name="user-type"]:checked').value;
-
+      
+      
       if (selectedUserType === 'client') {
-        window.location.href = 'signup-client.html'; 
+        window.location.href = 'login-client.html'; 
       } else if (selectedUserType === 'freelancer') {
-        window.location.href = 'signup-freelancer.html';
+        window.location.href = 'login-freelancer.html';
       }
     }
 

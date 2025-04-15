@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freeio - Sign Up to Hire Talent</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+        }
+        
+        .logo {
+            color: #2a41e8;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: white;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .social-btn:hover {
+            background-color: #f8f9ff;
+            border-color: #2a41e8;
+        }
+        
+        .social-btn.apple {
+            color: #000;
+        }
+        
+        .social-btn.google {
+            color: #4285F4;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #777;
+            font-size: 14px;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .divider::before {
+            margin-right: 15px;
+        }
+        
+        .divider::after {
+            margin-left: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #444;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: border-color 0.2s ease;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #2a41e8;
+            box-shadow: 0 0 0 2px rgba(42, 65, 232, 0.1);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            margin: 20px 0 25px;
+        }
+        
+        .checkbox-group input {
+            width: auto;
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .checkbox-group label {
+            font-size: 13px;
+            color: #555;
+            font-weight: normal;
+            line-height: 1.5;
+        }
+        
+        .checkbox-group a {
+            color: #2a41e8;
+            text-decoration: none;
+        }
+        
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+        
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background-color: #2a41e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #1a30d0;
+        }
+        
+        .login-link {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .login-link a {
+            color: #2a41e8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .password-requirements {
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">Freeio</div>
+        <h1>Sign up to hire talent</h1>
+        
+        <div class="social-buttons">
+            <button class="social-btn apple">
+                <i class="fab fa-apple"></i>
+                Continue with Apple
+            </button>
+            <button class="social-btn google">
+                <i class="fab fa-google"></i>
+                Continue with Google
+            </button>
+        </div>
+        
+        <div class="divider">or</div>
+        
+        <form>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first-name">First name</label>
+                    <input type="text" id="first-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last name</label>
+                    <input type="text" id="last-name" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Work email address</label>
+                <input type="email" id="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+                <p class="password-requirements">Password (8 or more characters)</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="country">Country</label>
+                <select id="country" class="form-control" style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 15px; background-color: white;">
+                    <option value="">Select Country</option>
+                    <option value="US">United States</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="CA">Canada</option>
+                    <option value="AU">Australia</option>
+                    <option value="IN">India</option>
+                    <option value="DE">Nigeria</option>
+                </select>
+            </div>
+            
+            <!-- <div class="form-group">
+                <label for="user-type">Sign up as</label>
+                <select id="user-type" required>
+                    <option value="">Select Role</option>
+                    <option value="client">Client</option>
+                    <option value="freelancer">Freelancer</option>
+                </select>
+            </div> -->
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="email-consent">
+                <label for="email-consent">Send me emails with tips on how to find talent that fits my needs.</label>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">Yes, I understand and agree to the Freeio <a href="#">Terms of Service</a>, including the <a href="#">User Agreement</a> and <a href="#">Privacy Policy</a>.</label>
+            </div>
+            
+            <button type="submit" class="btn-primary">Create my account</button>
+        </form>
+        
+        <p class="login-link">Already have an account? <a href="redirect.html">Log In</a></p>
+    </div>
+
+    <script>
+        document.querySelector("form").addEventListener("submit", function(e) {
+            e.preventDefault();
+    
+            const firstName = document.getElementById("first-name").value.trim();
+            const lastName = document.getElementById("last-name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const country = document.getElementById("country").value;
+    
+            if (!firstName || !lastName || !email || !password || !country) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+    
+            const userData = {
+                firstName,
+                lastName,
+                email,
+                password,
+                country
+            };
+    
+           
+            localStorage.setItem("userData", JSON.stringify(userData));
+    
+            
+            window.location.href = "login-client.html"; 
+        });
+    </script>
+    
+</body>
+</html>
