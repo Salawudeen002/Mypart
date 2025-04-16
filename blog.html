@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Articles - Sass</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #2d3748;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #1a202c;
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .article-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .article-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+        }
+        
+        .tag-sass {
+            background-color: #f56565;
+            color: white;
+        }
+        
+        .tag-email {
+            background-color: #4299e1;
+            color: white;
+        }
+        
+        .tag-marketing {
+            background-color: #9f7aea;
+            color: white;
+        }
+        
+        .tag-development {
+            background-color: #48bb78;
+            color: white;
+        }
+        
+        .tag-seo {
+            background-color: #ed8936;
+            color: white;
+        }
+        
+        .tag-project {
+            background-color: #667eea;
+            color: white;
+        }
+        
+        .tag-software {
+            background-color: #ed64a6;
+            color: white;
+        }
+        
+        .tag-management {
+            background-color: #38b2ac;
+            color: white;
+        }
+        
+        .tag-inspiration {
+            background-color: #f6ad55;
+            color: white;
+        }
+        
+        .article-content {
+            padding: 20px;
+        }
+        
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .article-content p {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .view-all {
+            text-align: center;
+            margin: 30px 0 40px;
+        }
+        
+        .view-all a {
+            color: #3182ce;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        
+        .categories {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .category-tag {
+            padding: 6px 12px;
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #4a5568;
+        }
+    </style>
+</head>
+<body>
+    <h1>Latest Article</h1>
+    
+    <div class="articles-grid">
+        <div class="article-card">
+            <div class="article-content">
+                <span class="article-tag tag-sass">Sass</span>
+                <h3>Mastering Sass Variables: A Comprehensive Guide</h3>
+                <p>Learn the ins and outs of Sass variables how they can streamline your styling workflow.</p>
+            </div>
+        </div>
+        
+        <div class="article-card">
+            <div class="article-content">
+                <span class="article-tag tag-email">Email</span>
+                <h3>The Future of Web Design: Exploring SassScript</h3>
+                <p>Dive into the power of SassScript and its potential to transform the way you write...</p>
+            </div>
+        </div>
+        
+        <div class="article-card">
+            <div class="article-content">
+                <span class="article-tag tag-marketing">Marketing</span>
+                <h3>Harnessing the Power of Sass Extensions</h3>
+                <p>Explore the world of Sass extensions and how they can extend the functionality of your Sass</p>
+            </div>
+        </div>
+        
+        <div class="article-card">
+            <div class="article-content">
+                <span class="article-tag tag-development">Development</span>
+                <h3>Top 10 Sass Mixins Every Developer Should Know</h3>
+                <p>Discover essential Sass mixins that can supercharge your development process.</p>
+            </div>
+        </div>
+        
+        <div class="article-card">
+            <div class="article-content">
+                <span class="article-tag tag-seo">SEO</span>
+                <h3>Optimizing Performance with Sass: Best Practices.</h3>
+                <p>Discover best practices for optimizing performance when using Sass in your projects.</p>
+            </div>
+        </div>
+        
+        <div class="article-card">
+            <div class="article-content">
+                <span class="article-tag tag-project">Project</span>
+                <h3>Advanced Sass Techniques: Pushing the Boundaries.</h3>
+                <p>Take your Sass skills to the next level with advanced techniques and concepts learn.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="view-all">
+        <a href="#">View All Blogs</a>
+    </div>
+    
+    <div class="categories">
+        <span class="category-tag">Sass</span>
+        <span class="category-tag">Development</span>
+        <span class="category-tag">Software</span>
+    </div>
+    
+    <div class="articles-grid">
+        <div class="article-card">
+            <div class="article-content">
+                <span class="article-tag tag-software">Software</span>
+                <h3>Sass vs. CSS: Understanding the Differences and Benefits</h3>
+                <p>Uncover the advantages of using Sass over traditional CSS and why it's become a staple...</p>
+            </div>
+        </div>
+        
+        <div class="article-card">
+            <div class="article-content">
+                <span class="article-tag tag-management">Management</span>
+                <h3>Exploring Sass Modules: Organize Your Code Like a Pro</h3>
+                <p>Unlock the benefits of modular styling with Sass modules. Learn how to structure your</p>
+            </div>
+        </div>
+        
+        <div class="article-card">
+            <div class="article-content">
+                <span class="article-tag tag-inspiration">Inspiration</span>
+                <h3>Sass Security: Best Practices for Secure Styling</h3>
+                <p>Ensure the security of your Sass projects with best practices and techniques for secure style.</p>
+            </div>
+        </div>
+        <div class="article-card">
+            <div class="article-content">
+                <span class="article-tag tag-email">Email</span>
+                <h3>The Future of Web Design: Exploring SassScript</h3>
+                <p>Dive into the power of SassScript and its potential to transform the way you write...</p>
+            </div>
+        </div>
+        <div class="article-card">
+            <div class="article-content">
+                <span class="article-tag tag-project">Project</span>
+                <h3>Advanced Sass Techniques: Pushing the Boundaries.</h3>
+                <p>Take your Sass skills to the next level with advanced techniques and concepts learn.</p>
+            </div>
+        </div>
+        <div class="article-card">
+            <div class="article-content">
+                <span class="article-tag tag-development">Development</span>
+                <h3>Top 10 Sass Mixins Every Developer Should Know</h3>
+                <p>Discover essential Sass mixins that can supercharge your development process.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
